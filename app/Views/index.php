@@ -33,8 +33,10 @@
             <header class="card-header">
                 <?php 
                     // grab the user id from the current review, use it to find the appropriate person from the authors array
-                        $authorId = $review['book_review_user_id'];
-                        $author = $review_author[$authorId] ?? null;
+                    $authorId = $review['book_review_user_id'];
+                    $author = $review_author[$authorId] ?? null;
+                    //get the current review id, grab the correct key that represents the formatted time
+                    $humanized_date_time = $review_date_time[$review['book_review_id']];
                     ?>
                 <p class="card-header-title"><?= esc($review['book_review_title']);?> - <?= $author['user_full_name'] ?>
                 </p>
@@ -43,11 +45,11 @@
                 <div class="content">
                     <?= esc($review['book_review_content']); ?>
                     <br />
-                    <time datetime="2016-1-1">11:09 PM - 1 Jan 2016</time>
+                    <i>Reviewed: <time><?= $humanized_date_time ?></time></i>
                 </div>
             </div>
             <footer class="card-footer">
-                <a href="#" class="card-footer-item">View More</a>
+                <a href="<?= base_url('view/' . $review['book_review_id'])?>" class="card-footer-item">View More</a>
             </footer>
         </div>
         <?php endforeach;?>

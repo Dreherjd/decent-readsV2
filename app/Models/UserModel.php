@@ -16,8 +16,11 @@ class UserModel extends Model{
         'user_location',
     ];
 
-    public function getUserByUserId(String $userId){
+    public function getUserFullNameByUserId(String $userId){
         return $this->select(['user_full_name'])->where(['user_id' => $userId])->first();
+    }
+    public function getUserByUserId(String $userId){
+        return $this->where(['user_id' => $userId])->first();
     }
 
 }
